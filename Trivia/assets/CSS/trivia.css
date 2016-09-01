@@ -1,0 +1,74 @@
+.quizContainer{
+	margin: auto;
+	width: 60%;
+	border-color: 3px green;
+	padding: 10px;
+}
+
+h1{
+	font-family: bootle;
+	letter-spacing: 2px;
+	font-size: 80px;
+	text-align: center;
+}
+
+.question{
+	font-size: 30px;
+	text-align: center;
+}
+
+.choiceList{
+	text-decoration: none;
+	margin: auto;
+	display: block;
+	margin-left: 30%;
+	list-style-type: none;
+	
+	font-size: 20px;
+}
+#nextButton{
+	margin: auto;
+	font-family: bootle;
+	font-size: 25px;
+	letter-spacing: 2px;
+	margin-left: 34%;
+	margin-top: 10px;
+}
+
+#nextButton:hover{
+	background-image: url("assets/images/flag2.png");
+	background-size:cover;
+	background-position: center;
+	color: #282728;
+}
+
+#heads{
+	margin: auto;
+	width: 50%;
+	margin-left: 12%;
+	margin-top: 20px;
+}
+
+#border-left{
+	float:left;
+	height: 100%
+
+}
+#border-right{
+	float: right;
+	height: 100%
+}
+
+li{
+  margin: 10px 0;
+}
+.result{
+	text-align: center;
+	font-family: bootle;
+	font-size: 40px;
+}
+
+.quizMessage{
+	text-align: center;
+	font-size: 20px;
+}
