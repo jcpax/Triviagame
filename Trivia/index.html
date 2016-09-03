@@ -11,34 +11,45 @@
 <body>
 
 <script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
-<script type="text/javascript" src="assets/JS/3trivia.js"> </script>
+<script type="text/javascript" src="assets/JS/trivia.js"> </script>
 
-    <img id='heads' src="assets/images/beatles.png">
+         <div id="border-left"> <img src="assets/images/colors-l.png"></div>
+    <div id="border-right"> <img src="assets/images/colors-r.png"></div>
 
 
-<div id="border-left"> <img src="assets/images/colors-l.png"></div>
-<div id="border-right"> <img src="assets/images/colors-r.png"></div>
+<img id='heads' src="assets/images/beatles.png">
 
-     <div class="quizContainer">
-         <h1>Beatles-Mania Quiz!</h1>
+      <h1>Beatles-Mania Quiz!</h1>
 
-        <div class="question"></div>
-        <ul class="choiceList"></ul>
-        <div class="info"></div>
-        <div class="result"></div>
-        <button class="btn btn-default" type="submit" id="nextButton">Next Question</button>
-        <br>
-        <div class="quizMessage"></div>
 
-    <div class='audio_player'>
-            <audio id='player' autoplay="auto">
+      <div class="wrapper">
+      <div id="quiz">
+
+      <p class="questions">
+        
+      </p>
+      
+      <div class="answers">
+      <div class="restart">
+      </div>
+      
+        
+      </div>         
+      <div id='timer'><h4>Time Remaining <span id="time">59</span></h4></div>
+      <div class="checkAnswers">
+        <h3>Correct?</h3>
+        <div class="checker">
+       </div>
+      <div class='audio_player'>
+     <audio id='player' autoplay="auto">
      <source src="assets/audio/Beatles_Loop.mp3" />  </audio>
      <button id ='button' type="button" class="btn btn-info">pause</button>
     </div>
-    
+
+
+      </div>
     </div>
-
-
+  </div>
 
 
 </body>

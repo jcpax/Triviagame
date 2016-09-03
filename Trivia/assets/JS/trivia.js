@@ -1,4 +1,58 @@
- //Play & Pause Song
+
+window.onload = function () {
+  
+  var questionArea = document.getElementsByClassName('questions')[0],
+      answerArea   = document.getElementsByClassName('answers')[0],
+      checker      = document.getElementsByClassName('checker')[0],
+      info         = document.getElementsByClassName('info')[0]
+      current      = 0,
+  
+     // An object that holds all the questions + possible answers.
+     // In the array the last digit gives the right answer position
+      allQuestions = {
+        'Who was the last person to join the Beatles?' : 
+                    ['Paul McCartney', 
+                    'John Lennon', 
+                    'Ringo Star',
+                    'George Harrison',2],
+        
+        'Which is Not a Beatles movie?' : 
+                    ['Hard Days Night', 
+                    'Yellow Submarine', 
+                    'Help!', 
+                    'With the Beatles', 3],
+        
+        'How many albums did the Beatles sell in total?' : 
+                    ['2,300,500,000', 
+                    '4,100,000,000', 
+                    '1,200,600,000', 
+                    '1,400,500,000',0],
+
+        'Who wrote the most songs for the Beatles?' : 
+                    ['John Lennon', 
+                    'Paul McCartney',
+                     'George Harrison', 
+                     'Lennon/McCartney',3],
+
+        'How many people in America watched the Beatles appearance on the Ed Sullivan show?' : ['70 Million', 
+                    '40 Million', 
+                    '2 Million', 
+                    '15 Million', 1],
+
+        'What record company rejected the Beatles originally?' :       ['Abbey Road', 
+                    'Singer Co,', 
+                    'Decca', 
+                    'Apple',2],
+
+        'What was the Bealtes first single in 1962?' :             
+                    ['Please Please Me', 
+                    'Love Me Do', 
+                    'I Saw Her Standing There', 
+                    'Twist and Shout',1] 
+
+      };
+
+       //Play & Pause Song
 $(document).ready(function() {
   var playing = true;
 
@@ -16,157 +70,119 @@ $(document).ready(function() {
         $(this).text("play");
       }
 
-  });
+  }); 
 });
 
-var questions = [{
+// Timer 
+  function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
 
-    question: 'Who was the last person to join the Beatles?',
-    choices: [      'Paul McCartney', 
-                    'John Lennon', 
-                    'Ringo Star', 
-                    'George Harrison'],
-    correctAnswer: 2,
-    //questionInfo: 'The Beatles only acquired Ringo as a member after their former drummer Pete Best left.'
-},
-{
-    question: 'Which is Not a Beatles movie?',
-    choices: [      'Hard Days Night', 
-                    'Yellow Submarine', 
-                    'Help!', 
-                    'With the Beatles'],
-    correctAnswer: 3,
-    //questionInfo: ' The Beatles had a long running film career with movies including Hard Days Night, Help!, Magical Mystery Tour, Yellow Submarine(thier only annimated feature), and The End.'
-},
-{   question: 'How many albums did the Beatles sell in total?',
-    choices: [      '2,300,500,000', 
-                    '4,100,000,000', 
-                    '1,200,600,000', 
-                    '1,400,500,000'],
-    correctAnswer: 0,
-    //questionInfo: 'In the United States alone the Beatles sold 209.1 Million albums on all avaiable markets, including iTunes.'
-},
-{   question: 'Who wrote the most songs for the Beatles?',
-    choices: [      'John Lennon', 
-                    'Paul McCartney',
-                     'George Harrison', 
-                     'Lennon/McCartney'],
-    correctAnswer: 3,
-    //questionInfo: 'From the begining John Lennon and Paul McCartney decided to publish their sings under both their names so all songs they worked on were under the hallmark Lennon/McCartney. The two wrote in total 159 of the groups 183 songs.'
-    },
-    {   question: 'How many people in America watched the Beatles appearance on the Ed Sullivan show?',
-    choices: [      '70 Million', 
-                    '40 Million', 
-                    '2 Million', 
-                    '15 Million'],
-    correctAnswer: 0,
-    },
-    //questionInfo: 'In the United States alone the Beatles sold 209.1 Million albums on all avaiable markets, including iTunes.'
-    {   question: 'What record company rejected the Beatles originally?',
-    choices: [      'Abbey Road', 
-                    'Singer Co,', 
-                    'Decca', 
-                    'Apple'],
-    correctAnswer: 2,
-    },
-    //questionInfo: 'In the United States alone the Beatles sold 209.1 Million albums on all avaiable markets, including iTunes.'
-    {   question: 'What was the Bealtes first single in 1962?',
-    choices: [      'Please Please Me', 
-                    'Love Me Do', 
-                    'I Saw Her Standing There', 
-                    'Twist and Shout'],
-    correctAnswer: 1,
-    //questionInfo: 'In the United States alone the Beatles sold 209.1 Million albums on all avaiable markets, including iTunes.'
-}];
- 
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
 
-
-
-//Global Variables
-var currentQuestion = 0;
-var correctAnswers = 0;
-var quizOver = false;
-
-
-//Start of Quiz
-$(document).ready(function () {
-
-    // Display the first question
-    displayCurrentQuestion();
-    $(this).find(".quizMessage").hide();
-
-
- // On clicking next, display the next question
-    $(this).find("#nextButton").on("click", function () {
-        if (!quizOver) {
-
-            value = $("input[type='radio']:checked").val();
-
-            if (value == undefined) {
-                $(document).find(".quizMessage").text("Please select an answer");
-                $(document).find(".quizMessage").show();
-            } else {
-                $(document).find(".quizMessage").hide();
-
-                if (value == questions[currentQuestion].correctAnswer) {
-                    correctAnswers++;
-                }
-
-                currentQuestion++;
-                if (currentQuestion < questions.length) {
-                    displayCurrentQuestion();
-                } else {
-                    displayScore();
-                    // Change the text in the next button to ask if user wants to play again
-                    $(document).find("#nextButton").text("Play Again?");
-                    quizOver = true;
-                }
-            }
-        } else { // quiz is over and clicked the next button (which now displays 'Play Again?'
-            quizOver = false;
-            $(document).find("#nextButton").text("Next Question");
-            resetQuiz();
-            displayCurrentQuestion();
-            hideScore();
+        display.text(seconds);
+// When Time Runs Out Question will Change
+        if (--timer < 0) {
+            timer = duration;
+            current += 1;
+            //loadQuestion(current);
+            //loadAnswers(current);
+            questionArea.innerHTML = 'You Ran Out of Time!';
+            answerArea.innerHTML = '<a href="start.html">RESTART</a>';
+            document.getElementById("timer").style.visibility = "hidden";
         }
-    });
+    }, 1000);
+}
 
+jQuery(function Timer($) {
+    var time = 60 * 1,
+        display = $('#time');
+    startTimer(time, display);
 });
 
-// This displays the current question AND the choices
-function displayCurrentQuestion() {
 
-    console.log("In display current Question");
+  function loadQuestion(curr) {
+  // Loads the questions from the array
+  
+    var question = Object.keys(allQuestions)[curr];
+    
+    questionArea.innerHTML = '';
+    questionArea.innerHTML = question;
+  }
+  
+  function loadAnswers(curr) {
+  // Will load the answers from the array and find which is marked correct
+  
+    var answers = allQuestions[Object.keys(allQuestions)[curr]];
+    
+    answerArea.innerHTML = '';
+    
+    for (var i = 0; i < answers.length -1; i += 1) {
+      var createDiv = document.createElement('div'),
+          text = document.createTextNode(answers[i]);
+      
+      createDiv.appendChild(text);      
+      createDiv.addEventListener("click", checkAnswer(i, answers));
 
-    var question = questions[currentQuestion].question;
-    var questionClass = $(document).find(".quizContainer > .question");
-    var choiceList = $(document).find(".quizContainer > .choiceList");
-    var numChoices = questions[currentQuestion].choices.length;
-
-    // Set the questionClass text to the current question
-    $(questionClass).text(question);
-
-    // Remove all current <li> elements (if any)
-    $(choiceList).find("li").remove();
-
-    var choice;
-    for (i = 0; i < numChoices; i++) {
-        choice = questions[currentQuestion].choices[i];
-        $('<li><input type="radio" value=' + i + ' name="dynradio" />' + choice + '</li>').appendTo(choiceList);
+      
+      
+      answerArea.appendChild(createDiv);
     }
-}
+  }
 
-function resetQuiz() {
-    currentQuestion = 0;
-    correctAnswers = 0;
-    hideScore();
-}
 
-function displayScore() {
-    $(document).find(".quizContainer > .result").text("You scored: " + correctAnswers + " out of " + questions.length);
-    $(document).find(".quizContainer > .result").show();
-}
+  function checkAnswer(i, arr) {
+    // Checks Answers and Will Mark Correct or Incorrect
+    
+    return function () {
+      var givenAnswer = i,
+          correctAnswer = arr[arr.length-1];
+      
+      if (givenAnswer === correctAnswer) {
+        addChecker(true);             
+      } else {
+        addChecker(false);                        
+      }
+      
+      if (current < Object.keys(allQuestions).length -1) {
+        current += 1;
+        
+        loadQuestion(current);
+        loadAnswers(current);
+      } else {
+        questionArea.innerHTML = '<a href="start.html">RESTART</a>';
+        answerArea.innerHTML = '';
 
-function hideScore() {
-    $(document).find(".result").hide();
-}
+      }
+                              
+    };
+  }
+
+  function addChecker(bool) {
+  // Adds the numbers at the bottom (styling done in CSS)
+  
+    var createDiv = document.createElement('div'),
+        txt       = document.createTextNode(current + 1);
+    
+    createDiv.appendChild(txt);
+    
+    if (bool) {
+      
+      createDiv.className += 'correct';
+      checker.appendChild(createDiv);
+    } else {
+      createDiv.className += 'false';
+      checker.appendChild(createDiv);
+    }
+  }
+  
+  // Start the quiz right away
+  loadQuestion(current);
+  loadAnswers(current);
+  
+};
+
+
