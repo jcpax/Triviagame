@@ -155,6 +155,7 @@ jQuery(function Timer($) {
       } else {
         questionArea.innerHTML = '<a href="start.html">RESTART</a>';
         answerArea.innerHTML = '';
+        document.getElementById("timer").style.visibility = "hidden";
 
       }
                               
